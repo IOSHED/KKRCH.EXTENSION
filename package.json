@@ -1,0 +1,16 @@
+{
+  "name": "@kkrch/extensions",
+  "private": true,
+  "version": "0.1.1",
+  "description": "Browser extensions for ККОРОЧЕ URL shortener (Chrome, Firefox, Safari)",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs --local",
+    "build:local": "node scripts/build.mjs --local",
+    "build:prod": "node scripts/build.mjs",
+    "pack:firefox": "npm run build:local && web-ext build -s dist/firefox -a dist/artifacts --overwrite-dest"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

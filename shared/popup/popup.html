@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="brand">KKOROCHE</title>
+    <link rel="stylesheet" href="../styles/popup.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="view-loading" class="view">
+        <div class="stack stack-center">
+          <img class="logo" src="../icons/brand.png" alt="" width="40" height="40" />
+          <p class="muted" data-i18n="loading">Just a moment…</p>
+        </div>
+      </section>
+
+      <section id="view-auth" class="view hidden">
+        <div class="stack">
+          <button type="button" class="brand-btn" data-open-home>
+            <img class="logo" src="../icons/brand.png" alt="" width="36" height="36" />
+            <span>
+              <span class="title" data-i18n="brand">KKOROCHE</span>
+              <span class="muted" data-i18n="brandTag">short links</span>
+            </span>
+          </button>
+
+          <h1 class="h1" data-i18n="authTitle">Sign in to your account</h1>
+          <p class="lead" data-i18n="authLead">
+            Tap the button to open the site. Sign in with Yandex or Google.
+          </p>
+
+          <div id="auth-waiting" class="note hidden" role="status"></div>
+
+          <button type="button" class="btn btn-primary" id="btn-login" data-i18n="authLogin">Sign in</button>
+          <button type="button" class="btn btn-text hidden" id="btn-cancel-wait" data-i18n="authCancelWait">
+            Cancel
+          </button>
+        </div>
+      </section>
+
+      <section id="view-project" class="view hidden">
+        <div class="stack">
+          <button type="button" class="brand-btn" data-open-home>
+            <img class="logo" src="../icons/brand.png" alt="" width="36" height="36" />
+            <span class="title" data-i18n="brand">KKOROCHE</span>
+          </button>
+
+          <h1 class="h1" data-i18n="projectWhereTitle">Where to save?</h1>
+          <p class="lead" data-i18n="projectWhereLead">
+            Choose a project for new links. You can change this later in settings.
+          </p>
+
+          <label class="field">
+            <span data-i18n="projectLabel">Project</span>
+            <div class="input-swap">
+              <select class="input" id="project-select" data-i18n-aria="projectLabel"></select>
+              <input
+                id="project-new-name"
+                class="input hidden"
+                type="text"
+                maxlength="120"
+                data-i18n-placeholder="projectNamePlaceholder"
+                data-i18n-aria="projectNamePlaceholder"
+              />
+            </div>
+          </label>
+          <div id="project-error" class="note note-warn hidden" role="alert"></div>
+
+          <button type="button" class="btn btn-primary" id="btn-project-continue" data-i18n="projectContinue">
+            Continue
+          </button>
+        </div>
+      </section>
+
+      <section id="view-create" class="view hidden">
+        <div class="stack">
+          <div class="top-row">
+            <button type="button" class="brand-btn compact" data-open-home>
+              <img class="logo sm" src="../icons/brand.png" alt="" width="28" height="28" />
+              <span class="title" data-i18n="brand">KKOROCHE</span>
+            </button>
+            <button
+              type="button"
+              class="icon-settings"
+              id="btn-settings"
+              data-i18n-title="settingsTitleAria"
+              data-i18n-aria="settingsTitleAria"
+            >
+              <img src="../icons/settings.svg" alt="" width="20" height="20" />
+            </button>
+          </div>
+
+          <p class="tiny muted" id="create-project-hint"></p>
+
+          <label class="field">
+            <span data-i18n="urlLabel">Long URL</span>
+            <input
+              id="long-url"
+              class="input"
+              type="url"
+              autocomplete="url"
+              data-i18n-placeholder="urlPlaceholder"
+            />
+          </label>
+          <div id="url-error" class="note note-warn hidden" role="alert"></div>
+
+          <label class="field">
+            <span data-i18n="folderLabel">Folder</span>
+            <div class="input-swap">
+              <select class="input" id="folder-select" data-i18n-aria="folderLabel"></select>
+              <div class="input-with-actions hidden" id="folder-new-row">
+                <input
+                  id="folder-new-name"
+                  class="input"
+                  type="text"
+                  maxlength="128"
+                  data-i18n-placeholder="folderNamePlaceholder"
+                  data-i18n-aria="folderNamePlaceholder"
+                />
+                <button
+                  type="button"
+                  class="icon-action"
+                  id="btn-folder-cancel"
+                  data-i18n-aria="clearCreate"
+                  data-i18n-title="clearCreate"
+                >
+                  <img src="../icons/x-mark.svg" alt="" width="18" height="18" />
+                </button>
+              </div>
+            </div>
+          </label>
+
+          <div id="create-error" class="note note-warn hidden" role="alert"></div>
+
+          <button type="button" class="btn btn-primary" id="btn-submit" data-i18n="submit">Shorten</button>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view hidden">
+        <div class="stack">
+          <div class="top-row">
+            <button type="button" class="brand-btn compact" data-open-home>
+              <img class="logo sm" src="../icons/brand.png" alt="" width="28" height="28" />
+              <span class="title" data-i18n="brand">KKOROCHE</span>
+            </button>
+            <button type="button" class="link" id="btn-settings-back" data-i18n="settingsBack">Back</button>
+          </div>
+
+          <h1 class="h1" data-i18n="settingsTitle">Settings</h1>
+
+          <label class="field">
+            <span data-i18n="settingsProjectLabel">Project for links</span>
+            <div class="input-swap">
+              <select class="input" id="settings-scope-select" data-i18n-aria="settingsProjectLabel"></select>
+              <div class="input-with-actions hidden" id="settings-new-row">
+                <input
+                  id="settings-new-name"
+                  class="input"
+                  type="text"
+                  maxlength="120"
+                  data-i18n-placeholder="projectNamePlaceholder"
+                  data-i18n-aria="projectNamePlaceholder"
+                />
+                <button
+                  type="button"
+                  class="icon-action icon-action-ok"
+                  id="btn-settings-create"
+                  data-i18n-aria="confirmCreate"
+                  data-i18n-title="confirmCreate"
+                >
+                  <img src="../icons/check.svg" alt="" width="18" height="18" />
+                </button>
+                <button
+                  type="button"
+                  class="icon-action"
+                  id="btn-settings-cancel"
+                  data-i18n-aria="clearCreate"
+                  data-i18n-title="clearCreate"
+                >
+                  <img src="../icons/x-mark.svg" alt="" width="18" height="18" />
+                </button>
+              </div>
+            </div>
+          </label>
+          <div id="settings-error" class="note note-warn hidden" role="alert"></div>
+
+          <button type="button" class="btn btn-secondary" id="btn-logout" data-i18n="logout">Sign out</button>
+        </div>
+      </section>
+
+      <section id="view-result" class="view hidden">
+        <div class="stack">
+          <button type="button" class="brand-btn compact" data-open-home>
+            <img class="logo sm" src="../icons/brand.png" alt="" width="28" height="28" />
+            <span class="title" data-i18n="brand">KKOROCHE</span>
+          </button>
+          <h1 class="h1" data-i18n="resultTitle">Done!</h1>
+          <p class="lead" data-i18n="resultLead">Your short link:</p>
+          <div class="result-box">
+            <code id="short-url"></code>
+          </div>
+          <button type="button" class="btn btn-primary" id="btn-copy" data-i18n="copy">Copy</button>
+          <button type="button" class="btn btn-secondary" id="btn-back" data-i18n="back">Make another</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="paywall-modal" class="paywall-modal hidden" aria-hidden="true">
+      <div class="paywall-backdrop" id="paywall-backdrop" role="presentation"></div>
+      <div class="paywall-dialog" role="dialog" aria-modal="true" aria-labelledby="paywall-title">
+        <img class="paywall-logo" src="../icons/brand.png" alt="" width="48" height="48" />
+        <h2 id="paywall-title" class="paywall-title" data-i18n="paywallTitle">Plan limit</h2>
+        <p class="paywall-subtitle" data-i18n="paywallLead">Upgrade your plan to continue</p>
+        <div class="paywall-reason-box" role="status">
+          <span class="paywall-reason-label" data-i18n="paywallReasonLabel">Why this appeared</span>
+          <p class="paywall-reason-text" id="paywall-reason"></p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-billing" data-i18n="paywallBilling">
+          Choose a plan
+        </button>
+        <button type="button" class="btn btn-secondary" id="btn-paywall-close" data-i18n="paywallClose">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script src="./popup.bundle.js"></script>
+  </body>
+</html>
